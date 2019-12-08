@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import useWidthElement from './useWidthElement';
@@ -14,8 +14,8 @@ import './MediaSlider.scss';
 import { SliderWrapper, SliderTitle } from './styles';
 
 function MediaSlider({ activeSlide, medias }) {
-  const mediasCount = medias ? medias.length : 0;
   const [currentSlide, setCurrentSlide] = useState(activeSlide);
+  const [mediasLength, setMediasLength] = useState(activeSlide);
   const { width, elementRef } = useWidthElement();
   const {
     handlePrev,
@@ -24,7 +24,15 @@ function MediaSlider({ activeSlide, medias }) {
     containerRef,
     hasNext,
     hasPrev,
-  } = useSliding(width, mediasCount);
+  } = useSliding(width, mediasLength);
+
+  useEffect(() => {
+    const { data } = medias;
+
+    if (data) {
+      setMediasLength(data.length);
+    }
+  }, [medias]);
 
   // return (
   //   <Container>
@@ -38,13 +46,13 @@ function MediaSlider({ activeSlide, medias }) {
 
   return (
     <SliderWrapper>
-      <SliderTitle>My List</SliderTitle>
+      <SliderTitle>{medias.metric}</SliderTitle>
       <div>
         <div className="slider">
           {hasPrev && <SliderButton type="left" onClick={handlePrev} />}
           <div ref={containerRef} className="slider__container" {...slideProps}>
             {medias &&
-              medias.map(media => (
+              medias.data.map(media => (
                 <SliderItem
                   key={media.id}
                   media={media}

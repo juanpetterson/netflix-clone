@@ -6,9 +6,7 @@ function useWidthElement() {
 
   useEffect(() => {
     console.log(elementRef);
-    if (elementRef && elementRef.current) {
-      setWidth(elementRef.current.clientWidth);
-    }
+    setWidth(elementRef.current.clientWidth);
   }, [elementRef.current]);
 
   return { width, elementRef };

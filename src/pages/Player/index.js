@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import { useSelector } from 'react-redux';
+import queryString from 'query-string';
 
 import video from '@/assets/videos/sonic.mp4';
 
@@ -9,21 +10,28 @@ import video from '@/assets/videos/sonic.mp4';
 export default function Player({ location }) {
   const videoRef = useRef(null);
   const user = useSelector(state => state.auth.user);
-  // const mediaId = location.search;
+  const values = queryString.parse(location.search);
+  const mediaId = parseInt(values.mediaId, 10);
 
   useEffect(() => {
-    console.log(location);
     let currentStored = JSON.parse(
       localStorage.getItem(`@netflix:${user.email}`)
     );
 
-    let storedMedia = currentStored.filter(item => {
-      return item.mediaId === 0;
-    });
+    let storedMedia;
 
-    if (!storedMedia[0]) {
+    if (currentStored) {
+      storedMedia = currentStored.filter(item => {
+        return item.mediaId === mediaId;
+      });
+    } else {
+      storedMedia = [];
+      currentStored = [];
+    }
+
+    if (!storedMedia.length) {
       const newMedia = {
-        mediaId: 1,
+        mediaId,
         progress: 0,
       };
 
@@ -47,7 +55,7 @@ export default function Player({ location }) {
     );
 
     let storedMedia = currentStored.filter(item => {
-      return item.mediaId === 0;
+      return item.mediaId === mediaId;
     });
 
     storedMedia[0].progress = progress;

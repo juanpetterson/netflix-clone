@@ -22,8 +22,6 @@ export default function Header(props) {
   const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
 
-  console.log(user);
-
   function handleSignOut() {
     dispatch(signOut());
   }
