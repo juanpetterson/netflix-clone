@@ -6,8 +6,8 @@ export const Container = styled.div`
   margin: 0 2px;
   position: relative;
 
-  height: 22vh;
+  height: 15vh;
 
   background: url(${props => props.thumbnail});
-  background-repeat: no-repeat;
+  background-size: cover;
 `;

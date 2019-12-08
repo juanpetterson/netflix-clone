@@ -10,15 +10,12 @@ import './SliderItem.scss';
 
 export default function SliderItem({ media, elementRef }) {
   function handleClick() {
-    history.push('/player');
+    history.push(`/player?mediaId=${media.id}`);
   }
 
   return (
-    <Container
-      ref={elementRef}
-      className="item"
-      onClick={handleClick}
-      thumbnail={media.thumbnail}
-    />
+    <div ref={elementRef} className="item" onClick={handleClick}>
+      <img src={media.thumbnail} />
+    </div>
   );
 }
