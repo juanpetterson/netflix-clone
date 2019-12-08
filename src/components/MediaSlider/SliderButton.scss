@@ -1,0 +1,29 @@
+.slider-button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4%;
+  max-width: 60px;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.5);
+  border: 0;
+  z-index: 4;
+
+  span {
+    width: 4%;
+    color: #fff;
+    margin: 0 auto;
+  }
+
+  &--left {
+    left: 0;
+  }
+
+  &--right {
+    right: 0;
+  }
+}
+
+.slider-arrow {
+  font-size: 40px;
+}

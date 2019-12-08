@@ -1,0 +1,26 @@
+.slider {
+  display: flex;
+
+  &__container {
+    display: flex;
+    padding: 0 4%;
+    transition: transform 300ms ease 100ms;
+    width: 100%;
+  }
+
+  &:not(&--open) .item:hover .show-details-button {
+    opacity: 1;
+  }
+
+  &:not(&--open) .item:hover {
+    transform: scale(1.5) !important;
+  }
+
+  &:not(&--open):hover .item {
+    transform: translateX(-25%);
+  }
+
+  &:not(&--open) .item:hover ~ .item {
+    transform: translateX(25%);
+  }
+}

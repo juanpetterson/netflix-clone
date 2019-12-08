@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    ["react-hot-loader/babel"],
+    [
+      "babel-plugin-root-import",
+      {
+        "rootPathSuffix": "src",
+        "rootPathPrefix": "@/"
+      }
+    ]
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ],
+    "@babel/preset-react"
+  ]
+}
