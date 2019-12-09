@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '@/styles/colors';
 import backgroundImage from '@/assets/images/background.jpg';
 
 export const Container = styled.div`
@@ -45,7 +46,7 @@ export const Content = styled.div`
   flex: 1;
   flex-direction: column;
   width: 100%;
-  min-height: 660px;
+  min-height: 460px;
   max-width: 350px;
   padding: 60px 68px 40px;
   margin: 0;
@@ -81,7 +82,7 @@ export const Input = styled.input`
 `;
 
 export const SignInButton = styled.button`
-  background-color: #e50914;
+  background-color: ${colors.primary};
   height: 48px;
   color: #fff;
   font-size: 16px;
@@ -122,4 +123,9 @@ export const H3 = styled.h3`
   color: #b3b3b3;
   font-size: 13px;
   font-weight: 500;
+`;
+
+export const ErrorSpan = styled.span`
+  font-size: 14px;
+  color: ${colors.danger};
 `;

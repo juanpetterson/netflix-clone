@@ -34,7 +34,7 @@ export default function Header(props) {
 
   return (
     <Container size={size}>
-      <Wrapper display={display}>
+      <Wrapper>
         <a href="/">
           <HeaderLogo size={size} src={headerLogo} alt="headerLogo" />
         </a>

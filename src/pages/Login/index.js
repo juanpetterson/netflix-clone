@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import useForm from 'react-hook-form';
 
 import { signIn } from '@/store/modules/auth/actions';
-import Types from '@/store/modules/auth/types';
 
 import Header from '@/components/Header';
+
+import { loginSchema as schema } from './Schema';
 
 import {
   Container,
@@ -20,21 +22,19 @@ import {
   FooterHeader,
   CheckboxWrapper,
   Checkbox,
+  ErrorSpan,
 } from './styles';
 
 function Login() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const { register, handleSubmit, errors } = useForm({
+    validationSchema: schema,
+  });
 
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    if (!username || !password) {
-      alert('Fill in all fields');
-    }
-
-    dispatch(signIn(username, password));
+  function onSubmit() {
+    dispatch(signIn(email, password));
   }
 
   return (
@@ -44,18 +44,26 @@ function Login() {
         <Content>
           <H1>Sign In</H1>
           <H2>Sign in to start watching or restart your membership.</H2>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Input
-              value={username}
-              onChange={e => setUsername(e.currentTarget.value)}
+              value={email}
+              name="email"
+              onChange={e => setEmail(e.currentTarget.value)}
               placeholder="Email or phone number"
+              ref={register}
             />
+            {errors.email && <ErrorSpan>{errors.email.message}</ErrorSpan>}
             <Input
               value={password}
+              name="password"
               onChange={e => setPassword(e.currentTarget.value)}
               placeholder="Password"
               type="password"
+              ref={register}
             />
+            {errors.password && (
+              <ErrorSpan>{errors.password.message}</ErrorSpan>
+            )}
             <SignInButton type="submit">Sign In</SignInButton>
           </Form>
           <Footer>
