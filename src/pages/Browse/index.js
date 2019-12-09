@@ -19,14 +19,6 @@ export default function Browse() {
     );
 
     if (currentStored) {
-      //reduce the data to get only the mediaId
-      // const keepWatchingData = currentStored.reduce((medias, stored) => {
-      //   const { mediaId } = stored;
-      //   medias[mediaId] = mediaId;
-
-      //   return medias;
-      // }, {});
-
       let medias = [];
       currentStored.forEach((media, index) => {
         medias[index] = media.mediaId;

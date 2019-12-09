@@ -10,7 +10,7 @@ function SliderItemDetails({ movie, onClose }) {
         <div className="content__background__shadow" />
         <div
           className="content__background__image"
-          style={{ 'background-image': `url(${movie.thumbnail})` }}
+          style={{ backgroundImage: `url(${movie.thumbnail})` }}
         />
       </div>
       <div className="content__area">
@@ -25,7 +25,7 @@ function SliderItemDetails({ movie, onClose }) {
           </div>
         </div>
         <button className="content__close" onClick={onClose}>
-          <i class={classnames('fas fa-times content-cross')} />
+          <i className={classnames('fas fa-times content-cross')} />
         </button>
       </div>
     </div>
