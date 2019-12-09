@@ -23,27 +23,17 @@ const logoSizes = {
   `,
 };
 
-const displays = {
-  fixed: css`
-    display: fixed;
-  `,
-
-  default: css`
-    display: flex;
-  `,
-};
-
 export const Container = styled.div`
   display: flex;
-  flex: 1;
   width: 100%;
   align-items: center;
   justify-content: space-between;
+
+  ${props => sizes[props.size || 'default']};
 `;
 
 export const Wrapper = styled.div`
   display: flex;
-  flex: 1;
   width: 100%;
   padding: 0 4%;
   align-items: center;
@@ -70,9 +60,6 @@ export const Wrapper = styled.div`
       color: ${colors.gray};
     }
   }
-
-  ${props => displays[props.display || 'default']};
-  ${props => sizes[props.size || 'default']};
 `;
 
 export const HeaderLogo = styled.img`
@@ -103,7 +90,7 @@ export const ProfileWrapper = styled.div`
 
 export const ProfileArrow = styled.i`
   font-size: 12px;
-  color: ${colors.light};
+  color: ${colors.lighter};
   position: absolute;
   top: 10px;
 `;
@@ -111,8 +98,9 @@ export const ProfileArrow = styled.i`
 export const ProfileDropMenu = styled.div`
   display: none;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.8);
   min-width: 80px;
+  z-index: 10;
 
   &:hover {
     display: block;

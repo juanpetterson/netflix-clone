@@ -10,7 +10,6 @@ import SliderButton from './SliderButton';
 
 import './MediaSlider.scss';
 
-// import { Container, Wrapper, ListTitle, MediaItem } from './styles';
 import { SliderWrapper, SliderTitle } from './styles';
 
 function MediaSlider({ activeSlide, medias }) {
@@ -34,19 +33,9 @@ function MediaSlider({ activeSlide, medias }) {
     }
   }, [medias]);
 
-  // return (
-  //   <Container>
-  //     {/* <ListTitle>My List</ListTitle> */}
-  //     <Wrapper>
-  //       {medias &&
-  //         medias.map(media => <MediaItem className="item2" key={media.id} />)}
-  //     </Wrapper>
-  //   </Container>
-  // );
-
   return (
-    <SliderWrapper>
-      <SliderTitle>{medias.metric}</SliderTitle>
+    <div className="slider-wrapper">
+      <span className="slider-title">{medias.metric}</span>
       <div>
         <div className="slider">
           {hasPrev && <SliderButton type="left" onClick={handlePrev} />}
@@ -63,7 +52,7 @@ function MediaSlider({ activeSlide, medias }) {
           {hasNext && <SliderButton type="right" onClick={handleNext} />}
         </div>
       </div>
-    </SliderWrapper>
+    </div>
   );
 }
 

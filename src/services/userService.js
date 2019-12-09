@@ -9,8 +9,7 @@ const users = [
     password: 'peterflix',
     picture: peterProfile,
     plan: 'Padrão HD',
-    creditcard: '0987',
-    lastMovies: '',
+    creditCard: '0987',
   },
   {
     id: 2,
@@ -19,8 +18,7 @@ const users = [
     password: 'jonasflix',
     picture: jonasProfile,
     plan: 'Premium Ultra HD',
-    creditcard: '1234',
-    lastMovies: '',
+    creditCard: '1234',
   },
 ];
 

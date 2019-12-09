@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   display: flex;
   transition: transform 500ms ease 100ms;
 
-  &:hover .item2 {
+  &:hover {
     transform: translateX(-25%);
   }
 `;

@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 import { signIn } from '@/store/modules/auth/actions';
 import Types from '@/store/modules/auth/types';
 
-import headerLogo from '@/assets/images/logo.svg';
-
 import Header from '@/components/Header';
 
 import {
@@ -42,7 +40,7 @@ function Login() {
   return (
     <Container>
       <Wrapper>
-        <Header logo={headerLogo} />
+        <Header />
         <Content>
           <H1>Sign In</H1>
           <H2>Sign in to start watching or restart your membership.</H2>

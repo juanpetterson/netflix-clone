@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 
+import headerLogo from '@/assets/images/logo.svg';
+import history from '@/services/history';
 import { signOut } from '@/store/modules/auth/actions';
 
 import {
@@ -18,7 +20,7 @@ import {
 } from './styles';
 
 export default function Header(props) {
-  const { logo, size, display } = props;
+  const { size, display } = props;
   const user = useSelector(state => state.auth.user);
   const dispatch = useDispatch();
 
@@ -26,11 +28,15 @@ export default function Header(props) {
     dispatch(signOut());
   }
 
+  function handleProfile() {
+    history.push('/profile');
+  }
+
   return (
-    <Container>
-      <Wrapper size={size} display={display}>
+    <Container size={size}>
+      <Wrapper display={display}>
         <a href="/">
-          <HeaderLogo size={size} src={logo} alt="headerLogo" />
+          <HeaderLogo size={size} src={headerLogo} alt="headerLogo" />
         </a>
         {user && (
           <div>
@@ -45,6 +51,11 @@ export default function Header(props) {
               <ProfilePicture src={user.picture} alt="userPicture" />
               <ProfileArrow className="fas fa-caret-down" />
               <ProfileDropMenu className="profileDropMenu">
+                <ProfileDropItem>
+                  <ProfileDropContent onClick={handleProfile}>
+                    Profile
+                  </ProfileDropContent>
+                </ProfileDropItem>
                 <ProfileDropItem>
                   <ProfileDropContent onClick={handleSignOut}>
                     Sign out

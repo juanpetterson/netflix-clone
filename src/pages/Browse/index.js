@@ -3,9 +3,6 @@ import { useSelector } from 'react-redux';
 
 import Header from '@/components/Header';
 import MediaSlider from '@/components/MediaSlider';
-
-import headerLogo from '@/assets/images/logo.svg';
-
 import mediaService from '@/services/mediaService';
 // import { Container } from './styles';
 
@@ -23,15 +20,20 @@ export default function Browse() {
 
     if (currentStored) {
       //reduce the data to get only the mediaId
-      const keepWatchingData = currentStored.reduce((medias, stored) => {
-        const { mediaId } = stored;
-        medias[mediaId] = mediaId;
+      // const keepWatchingData = currentStored.reduce((medias, stored) => {
+      //   const { mediaId } = stored;
+      //   medias[mediaId] = mediaId;
 
-        return medias;
-      }, {});
+      //   return medias;
+      // }, {});
+
+      let medias = [];
+      currentStored.forEach((media, index) => {
+        medias[index] = media.mediaId;
+      });
 
       //get the mediaId`s data from allMedias
-      const keepWatching = mediaService.getWatchingMedias(keepWatchingData);
+      const keepWatching = mediaService.getWatchingMedias(medias);
 
       //put the Continue Watching list in the first data index
       mediasData.unshift(keepWatching);
@@ -42,7 +44,7 @@ export default function Browse() {
 
   return (
     <div>
-      <Header logo={headerLogo} size="small" />
+      <Header size="small" />
       {data &&
         data.map(medias => <MediaSlider key={medias.metric} medias={medias} />)}
     </div>
