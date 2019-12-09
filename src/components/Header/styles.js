@@ -73,7 +73,7 @@ export const ProfileContainer = styled.div`
   position: absolute;
   display: inline-block;
   cursor: pointer;
-  top: 20px;
+  top: 15px;
 
   &:hover .profileDropMenu {
     display: block;
