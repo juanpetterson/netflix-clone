@@ -6,7 +6,7 @@ import useSliding from './useSliding';
 
 import SliderItem from './SliderItem';
 import SliderButton from './SliderButton';
-import SliderItemContent from './SliderItemContent';
+import SliderItemDetails from './SliderItemDetails';
 
 import './MediaSlider.scss';
 
@@ -66,7 +66,7 @@ function MediaSlider({ activeSlide, medias }) {
         </div>
       </div>
       {currentSlide && (
-        <SliderItemContent movie={currentSlide} onClose={handleClose} />
+        <SliderItemDetails movie={currentSlide} onClose={handleClose} />
       )}
     </div>
   );
