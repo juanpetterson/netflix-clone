@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
 import useWidthElement from './useWidthElement';
 import useSliding from './useSliding';
-import SliderContext from './SliderContext';
 
 import SliderItem from './SliderItem';
 import SliderButton from './SliderButton';
+import SliderItemContent from './SliderItemContent';
 
 import './MediaSlider.scss';
-
-import { SliderWrapper, SliderTitle } from './styles';
 
 function MediaSlider({ activeSlide, medias }) {
   const [currentSlide, setCurrentSlide] = useState(activeSlide);
@@ -33,11 +31,23 @@ function MediaSlider({ activeSlide, medias }) {
     }
   }, [medias]);
 
+  const handleSelect = media => {
+    setCurrentSlide(media);
+  };
+
+  const handleClose = () => {
+    setCurrentSlide(null);
+  };
+
   return (
-    <div className="slider-wrapper">
-      <span className="slider-title">{medias.metric}</span>
-      <div>
-        <div className="slider">
+    <div>
+      <div className="slider-wrapper">
+        <span className="slider-title">{medias.metric}</span>
+        <div
+          className={classnames('slider', {
+            'slider--open': currentSlide != null,
+          })}
+        >
           {hasPrev && <SliderButton type="left" onClick={handlePrev} />}
           <div ref={containerRef} className="slider__container" {...slideProps}>
             {medias &&
@@ -46,12 +56,18 @@ function MediaSlider({ activeSlide, medias }) {
                   key={media.id}
                   media={media}
                   elementRef={elementRef}
+                  onSelectSlide={handleSelect}
+                  onCloseSlide={handleClose}
+                  currentSlide={currentSlide}
                 />
               ))}
           </div>
           {hasNext && <SliderButton type="right" onClick={handleNext} />}
         </div>
       </div>
+      {currentSlide && (
+        <SliderItemContent movie={currentSlide} onClose={handleClose} />
+      )}
     </div>
   );
 }

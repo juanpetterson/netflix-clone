@@ -19,15 +19,17 @@
 
 .slider {
   display: flex;
+  position: relative;
 
   &__container {
     display: flex;
     padding: 0 4%;
+    z-index: 3;
     transition: transform 300ms ease 100ms;
     width: 100%;
   }
 
-  &:not(&--open) .item:hover .show-details-button {
+  &:not(&--open) .item:hover .slider-details-button {
     opacity: 1;
   }
 

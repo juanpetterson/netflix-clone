@@ -3,10 +3,10 @@
   top: 0;
   bottom: 0;
   width: 4%;
-  max-width: 60px;
-  height: 100%;
-  background: rgba(20, 20, 20, 0.5);
+  background: rgba(0, 0, 0, 0.5);
   border: 0;
+  outline: 0;
+  padding: 0;
   z-index: 4;
 
   span {
@@ -25,5 +25,5 @@
 }
 
 .slider-arrow {
-  font-size: 40px;
+  font-size: 30px;
 }

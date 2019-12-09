@@ -28,13 +28,13 @@ function useSliding(elementWidth, countElements) {
   };
 
   const slideProps = {
-    style: { transform: `translate3d(${distance})px, 0, 0` },
+    style: { transform: `translate3d(${distance}px, 0, 0)` },
   };
 
   const hasPrev = distance < 0;
   const hasNext = viewed + totalInViewport < countElements;
 
-  return 0;
+  return { handlePrev, handleNext, slideProps, containerRef, hasPrev, hasNext };
 }
 
 export default useSliding;
