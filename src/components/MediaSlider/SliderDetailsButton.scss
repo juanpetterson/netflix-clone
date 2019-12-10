@@ -3,8 +3,8 @@
   bottom: 1%;
   left: 40%;
   right: 0;
-  opacity: 1;
-  transition: opacity 300ms ease 100ms;
+  opacity: 0;
+  transition: 300ms ease 100ms;
   background: transparent;
   border: 0;
   outline: none;
@@ -21,4 +21,10 @@
 .details-arrow {
   font-size: 20px;
   color: #fff;
+  cursor: pointer;
+  transition: 300ms ease 100ms;
+
+  &:hover {
+    color: #e50914;
+  }
 }

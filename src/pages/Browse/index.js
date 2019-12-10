@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Header from '@/components/Header';
+import MediaDetails from '@/components/MediaDetails';
 import MediaSlider from '@/components/MediaSlider';
 import mediaService from '@/services/mediaService';
 // import { Container } from './styles';
@@ -37,6 +38,7 @@ export default function Browse() {
   return (
     <div>
       <Header size="small" />
+      <MediaDetails />
       {data &&
         data.map(medias => <MediaSlider key={medias.metric} medias={medias} />)}
     </div>

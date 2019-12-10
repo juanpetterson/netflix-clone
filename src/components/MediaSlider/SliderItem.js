@@ -21,9 +21,11 @@ function SliderItem({ media, elementRef, onSelectSlide, currentSlide }) {
         'item--open': isActive,
       })}
     >
-      <img src={media.thumbnail} alt="mediaThumbnail" onClick={handleClick} />
-      <SliderDetailsButton onClick={() => onSelectSlide(media)} />
-      {isActive && <div className="mark" />}
+      <div className="itemContent">
+        <img src={media.thumbnail} alt="mediaThumbnail" onClick={handleClick} />
+        <SliderDetailsButton onClick={() => onSelectSlide(media)} />
+        {isActive && <div className="mark" />}
+      </div>
     </div>
   );
 }

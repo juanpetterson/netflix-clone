@@ -12,7 +12,7 @@
 
 .slider-title {
   color: #e5e5e5;
-  font-size: 1.3vw;
+  font-size: 1.4vw;
   font-weight: 700;
   user-select: none;
 }
@@ -24,7 +24,6 @@
   &__container {
     display: flex;
     padding: 0 4%;
-    z-index: 3;
     transition: transform 300ms ease 100ms;
     width: 100%;
   }

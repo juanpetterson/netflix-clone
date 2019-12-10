@@ -47,7 +47,7 @@ export const Content = styled.div`
   flex-direction: column;
   width: 100%;
   min-height: 460px;
-  max-width: 350px;
+  max-width: 300px;
   padding: 60px 68px 40px;
   margin: 0;
   margin-bottom: 90px;
@@ -117,15 +117,11 @@ export const Checkbox = styled.input.attrs({
 })`
   height: 15px;
   width: 15px;
+  margin-right: 5px;
 `;
 
 export const H3 = styled.h3`
   color: #b3b3b3;
   font-size: 13px;
   font-weight: 500;
-`;
-
-export const ErrorSpan = styled.span`
-  font-size: 14px;
-  color: ${colors.danger};
 `;

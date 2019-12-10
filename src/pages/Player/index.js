@@ -37,7 +37,7 @@ export default function Player({ location }) {
 
     if (!storedMedia.length) {
       const media = mediaService.getMedia(mediaId);
-      console.log(media);
+
       const newMedia = {
         mediaId,
         progress: 0,
