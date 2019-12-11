@@ -1,5 +1,4 @@
 import React from 'react';
-// import './SliderButton.scss';
 
 import { Button, Arrow, IconSpan } from './SliderButtonStyles';
 

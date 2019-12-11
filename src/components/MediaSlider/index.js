@@ -8,8 +8,6 @@ import SliderItem from './SliderItem';
 import SliderButton from './SliderButton';
 import SliderMediaDetails from './SliderMediaDetails';
 
-// import './MediaSlider.scss';
-
 import { Slider, SliderWrapper, SliderContainer, SliderTitle } from './styles';
 
 function MediaSlider({ activeSlide, medias }) {

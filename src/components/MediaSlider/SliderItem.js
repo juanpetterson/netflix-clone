@@ -5,8 +5,6 @@ import SliderDetailsButton from './SliderDetailsButton';
 
 import history from '@/services/history';
 
-// import './SliderItem.scss';
-
 import { Container, Content, Image, BorderMark } from './SliderItemStyles';
 
 function SliderItem({ media, elementRef, onSelectSlide, currentSlide }) {
