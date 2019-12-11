@@ -15,23 +15,31 @@ import {
 
 export default function Profile() {
   const user = useSelector(state => state.auth.user);
+  const mediaData = useSelector(state => state.media.data);
   const [lastWatched, setLastWatched] = useState('');
 
   useEffect(() => {
-    let currentStored = JSON.parse(
-      localStorage.getItem(`@netflix:${user.email}`)
-    );
+    let data = [...mediaData];
 
-    if (currentStored) {
-      //slice the last watched movies stored to get only the last 5
-      let lastWatchedStored = currentStored.slice(0, 5);
+    let userData = data.find(data => data.user === user.id);
 
-      let watched = [];
-      lastWatchedStored.forEach((movie, index) => {
-        watched[index] = movie.title;
-      }, {});
+    //check if user has saved data
+    if (userData) {
+      const { medias } = userData;
 
-      setLastWatched(watched.toString());
+      //check if user has watched some media
+      if (medias) {
+        //slice the last watched movies stored to get only the last 5
+        let lastWatchedStored = medias.slice(0, 5);
+
+        //loop to get the medias title
+        let watched = [];
+        lastWatchedStored.forEach((movie, index) => {
+          watched[index] = movie.title;
+        }, {});
+
+        setLastWatched(watched.toString());
+      }
     }
   }, []);
 

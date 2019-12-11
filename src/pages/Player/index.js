@@ -1,95 +1,120 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ReactPlayer from 'react-player';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import Plyr from 'Plyr';
 import { useSelector, useDispatch } from 'react-redux';
 import queryString from 'query-string';
 
-import { updateUser } from '@/store/modules/auth/actions';
+import { updateMedia } from '@/store/modules/media/actions';
 
 import history from '@/services/history';
 
 import video from '@/assets/videos/sonic.mp4';
 
-import { Container, Header, ArrowBack } from './styles';
+import { Container, Header, ArrowBack, PlyrPlayer } from './styles';
 import mediaService from '@/services/mediaService';
 
 export default function Player({ location }) {
-  const videoRef = useRef(null);
+  const playerRef = useRef(null);
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  const mediaData = useSelector(state => state.media.data);
   const values = queryString.parse(location.search);
   const mediaId = parseInt(values.mediaId, 10);
 
   useEffect(() => {
-    let currentStored = JSON.parse(
-      localStorage.getItem(`@netflix:${user.email}`)
-    );
+    const player = new Plyr('#player', {
+      controls: [
+        'play-large',
+        'restart',
+        'rewind',
+        'play',
+        'fast-forward',
+        'progress',
+        'current-time',
+        'mute',
+        'volume',
+        'fullscreen',
+      ],
+    });
 
-    let storedMedia;
+    //update the progress while the media is playing
+    player.on('timeupdate', () => {
+      handleProgress(player.currentTime);
+    });
 
-    if (currentStored) {
-      storedMedia = currentStored.filter(item => {
-        return item.mediaId === mediaId;
-      });
-    } else {
-      storedMedia = [];
-      currentStored = [];
-    }
+    //set the progress to 0 when media was ended
+    player.on('ended', () => {
+      handleProgress(0);
+    });
 
-    if (!storedMedia.length) {
-      const media = mediaService.getMedia(mediaId);
+    //set the media start point
+    player.on('play', () => {
+      updateCurrentTime();
+    });
+    const media = mediaService.getMedia(mediaId);
+    let data = [...mediaData];
 
+    let userData = data.find(data => data.user === user.id);
+
+    if (!userData) {
       const newMedia = {
         mediaId,
         progress: 0,
         title: media.title,
       };
 
-      storedMedia[0] = newMedia;
-      currentStored.unshift(newMedia);
+      userData = {
+        user: user.id,
+        medias: [newMedia],
+      };
 
-      localStorage.setItem(
-        `@netflix:${user.email}`,
-        JSON.stringify(currentStored)
-      );
+      data.push(userData);
+    } else {
+      const { medias } = userData;
+
+      let storedMedia = medias.find(media => media.mediaId === mediaId);
+
+      if (!storedMedia) {
+        storedMedia = {
+          mediaId,
+          progress: 0,
+          title: media.title,
+        };
+
+        medias.unshift(storedMedia);
+      } else {
+        player.currentTime = storedMedia.progress;
+      }
     }
 
-    videoRef.current.seekTo(storedMedia[0].progress, 'seconds');
+    dispatch(updateMedia(data));
+
+    return () => {
+      player.destroy();
+    };
   }, []);
 
-  function handleProgress(e) {
-    const progress = e.playedSeconds;
+  function handleProgress(progress) {
+    let data = [...mediaData];
 
-    let currentStored = JSON.parse(
-      localStorage.getItem(`@netflix:${user.email}`)
-    );
+    let userData = data.find(data => data.user === user.id);
 
-    let storedMedia = currentStored.filter(item => {
-      return item.mediaId === mediaId;
-    });
+    const { medias } = userData;
 
-    storedMedia[0].progress = progress;
+    let storedMedia = medias.find(media => media.mediaId === mediaId);
+    storedMedia.progress = progress;
 
-    localStorage.setItem(
-      `@netflix:${user.email}`,
-      JSON.stringify(currentStored)
-    );
+    dispatch(updateMedia(data));
   }
 
-  function handleEnded() {
-    let currentStored = JSON.parse(
-      localStorage.getItem(`@netflix:${user.email}`)
-    );
+  function updateCurrentTime() {
+    let data = [...mediaData];
 
-    let storedMedia = currentStored.filter(item => {
-      return item.mediaId === mediaId;
-    });
+    let userData = data.find(data => data.user === user.id);
 
-    storedMedia[0].progress = 0;
+    const { medias } = userData;
 
-    localStorage.setItem(
-      `@netflix:${user.email}`,
-      JSON.stringify(currentStored)
-    );
+    let storedMedia = medias.find(media => media.mediaId === mediaId);
+    player.currentTime = storedMedia.progress;
   }
 
   function handleBack() {
@@ -104,24 +129,12 @@ export default function Player({ location }) {
           className="fas fa-arrow-left"
         ></ArrowBack>
       </Header>
-      <ReactPlayer
-        url={video}
-        playing={true}
-        controls
-        width="100%"
-        height="100%"
-        onProgress={handleProgress}
-        onEnded={handleEnded}
-        ref={videoRef}
-        config={{
-          file: {
-            attributes: {
-              controlsList: 'nodownload',
-              onContextMenu: e => e.preventDefault(),
-              disablePictureInPicture: true,
-            },
-          },
-        }}
+      <PlyrPlayer
+        id="player"
+        src={video}
+        type="video"
+        ref={playerRef}
+        seekTime={15}
       />
     </Container>
   );

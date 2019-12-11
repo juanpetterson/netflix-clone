@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'netflix',
       storage,
-      whitelist: ['auth'],
+      whitelist: ['auth', 'media'],
     },
     reducers
   );

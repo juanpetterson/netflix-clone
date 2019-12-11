@@ -10,26 +10,33 @@ import mediaService from '@/services/mediaService';
 export default function Browse() {
   const [data, setData] = useState([]);
   const user = useSelector(state => state.auth.user);
+  const storedData = useSelector(state => state.media.data);
 
   useEffect(() => {
     const mediasData = mediaService.getMedias();
 
-    //get the data from localStorage
-    let currentStored = JSON.parse(
-      localStorage.getItem(`@netflix:${user.email}`)
-    );
+    let data = [...storedData];
 
-    if (currentStored) {
-      let medias = [];
-      currentStored.forEach((media, index) => {
-        medias[index] = media.mediaId;
-      });
+    let userData = data.find(data => data.user === user.id);
 
-      //get the mediaId`s data from allMedias
-      const keepWatching = mediaService.getWatchingMedias(medias);
+    //check if user has saved data
+    if (userData) {
+      const { medias } = userData;
 
-      //put the Continue Watching list in the first data index
-      mediasData.unshift(keepWatching);
+      //check if user has watched some media
+      if (medias) {
+        //loop to get the medias title
+        let userMedias = [];
+        medias.forEach((media, index) => {
+          userMedias[index] = media.mediaId;
+        });
+
+        //get the mediaId`s data from allMedias
+        const keepWatching = mediaService.getWatchingMedias(userMedias);
+
+        //put the Continue Watching list in the first data index
+        mediasData.unshift(keepWatching);
+      }
     }
 
     setData(mediasData);

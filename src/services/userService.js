@@ -8,7 +8,7 @@ const users = [
     email: 'peter@netflix.com',
     password: 'peterflix',
     picture: peterProfile,
-    plan: 'Padrão HD',
+    plan: 'Standard HD',
     creditCard: '0987',
   },
   {

@@ -272,6 +272,7 @@ export default {
 
   getWatchingMedias(params) {
     let keepWatching = [];
+
     params.forEach((id, index) => {
       keepWatching[index] = allMedias.filter(media => media.id === id)[0];
     });

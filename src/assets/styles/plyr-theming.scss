@@ -1,0 +1,36 @@
+$base-color: #e50914;
+
+.plyr--full-ui {
+  height: 100%;
+}
+
+.plyr--full-ui input[type='range'] {
+  color: $base-color;
+}
+
+.plyr__control--overlaid {
+  background: rgba($base-color, 0.8);
+}
+
+.plyr__video-wrapper {
+  height: 100%;
+}
+
+.plyr__video-wrapper #player {
+  height: 100%;
+}
+
+.plyr--video .plyr__control.plyr__tab-focus,
+.plyr--video .plyr__control:hover,
+.plyr--video .plyr__control[aria-expanded='true'] {
+  background: $base-color;
+}
+
+.plyr__control.plyr__tab-focus {
+  box-shadow: 0 0 0 5px rgba($base-color, 0.5);
+}
+
+.plyr__menu__container
+  .plyr__control[role='menuitemradio'][aria-checked='true']::before {
+  background: $base-color;
+}

@@ -6,11 +6,9 @@ import history from '@/services/history';
 export function signIn(email, password) {
   const users = userService.getUsers();
 
-  const user = users.filter(
-    user => user.email === email && user.password === password
-  )[0];
+  const user = users.filter(user => user.email === email)[0];
 
-  if (!user) {
+  if (!user || user.password !== password) {
     alert('Incorrect email or password');
   }
 

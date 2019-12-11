@@ -8,7 +8,9 @@ import SliderItem from './SliderItem';
 import SliderButton from './SliderButton';
 import SliderMediaDetails from './SliderMediaDetails';
 
-import './MediaSlider.scss';
+// import './MediaSlider.scss';
+
+import { Slider, SliderWrapper, SliderContainer, SliderTitle } from './styles';
 
 function MediaSlider({ activeSlide, medias }) {
   const [currentSlide, setCurrentSlide] = useState(activeSlide);
@@ -41,15 +43,19 @@ function MediaSlider({ activeSlide, medias }) {
 
   return (
     <div>
-      <div className="slider-wrapper">
-        <span className="slider-title">{medias.metric}</span>
-        <div
+      <SliderWrapper className="slider-wrapper">
+        <SliderTitle className="slider-title">{medias.metric}</SliderTitle>
+        <Slider
           className={classnames('slider', {
             'slider--open': currentSlide != null,
           })}
         >
           {hasPrev && <SliderButton type="left" onClick={handlePrev} />}
-          <div ref={containerRef} className="slider__container" {...slideProps}>
+          <SliderContainer
+            ref={containerRef}
+            className="slider__container"
+            {...slideProps}
+          >
             {medias &&
               medias.data.map(media => (
                 <SliderItem
@@ -61,10 +67,10 @@ function MediaSlider({ activeSlide, medias }) {
                   currentSlide={currentSlide}
                 />
               ))}
-          </div>
+          </SliderContainer>
           {hasNext && <SliderButton type="right" onClick={handleNext} />}
-        </div>
-      </div>
+        </Slider>
+      </SliderWrapper>
       {currentSlide && (
         <SliderMediaDetails media={currentSlide} onClose={handleClose} />
       )}

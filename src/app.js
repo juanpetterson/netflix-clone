@@ -11,6 +11,9 @@ import history from './services/history';
 
 import { store, persistor } from './store';
 
+import 'plyr/dist/plyr.css';
+import '@/assets/styles/plyr-theming.scss';
+
 function App() {
   return (
     <Provider store={store}>

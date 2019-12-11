@@ -1,16 +1,15 @@
 import React from 'react';
-import './SliderButton.scss';
+// import './SliderButton.scss';
+
+import { Button, Arrow, IconSpan } from './SliderButtonStyles';
 
 function SliderButton({ onClick, type }) {
   return (
-    <button
-      className={`slider-button slider-button--${type}`}
-      onClick={onClick}
-    >
-      <span className="slider-arrow">
-        <i className={`fas fa-chevron-${type}`} />
-      </span>
-    </button>
+    <Button direction={type} onClick={onClick}>
+      <IconSpan>
+        <Arrow className={`fas fa-chevron-${type}`} />
+      </IconSpan>
+    </Button>
   );
 }
 

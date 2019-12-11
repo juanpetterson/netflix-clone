@@ -18,7 +18,7 @@ const config = {
         use: 'file-loader',
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {

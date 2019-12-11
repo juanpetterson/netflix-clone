@@ -1,14 +1,16 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import './SliderDetailsButton.scss';
+import { Button, Span, ArrowIcon } from './SliderDetailsButtonStyles';
 
 const SliderDetailsButton = ({ onClick }) => (
-  <button onClick={onClick} className="slider-details-button">
-    <span>
-      <i className={classnames('fas fa-chevron-down', 'details-arrow')} />
-    </span>
-  </button>
+  <Button onClick={onClick} className="slider-details-button">
+    <Span>
+      <ArrowIcon
+        className={classnames('fas fa-chevron-down', 'details-arrow')}
+      />
+    </Span>
+  </Button>
 );
 
 export default SliderDetailsButton;

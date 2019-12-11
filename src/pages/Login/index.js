@@ -43,7 +43,7 @@ function Login() {
               value={email}
               name="email"
               onChange={e => setEmail(e.currentTarget.value)}
-              placeholder="Email or phone number"
+              placeholder="Email"
               autoFocus
             />
             <Input

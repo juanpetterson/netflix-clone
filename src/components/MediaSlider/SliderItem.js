@@ -5,7 +5,9 @@ import SliderDetailsButton from './SliderDetailsButton';
 
 import history from '@/services/history';
 
-import './SliderItem.scss';
+// import './SliderItem.scss';
+
+import { Container, Content, Image, BorderMark } from './SliderItemStyles';
 
 function SliderItem({ media, elementRef, onSelectSlide, currentSlide }) {
   const isActive = currentSlide && currentSlide.id === media.id;
@@ -15,18 +17,22 @@ function SliderItem({ media, elementRef, onSelectSlide, currentSlide }) {
   }
 
   return (
-    <div
+    <Container
       ref={elementRef}
       className={classnames('item', {
         'item--open': isActive,
       })}
     >
-      <div className="itemContent">
-        <img src={media.thumbnail} alt="mediaThumbnail" onClick={handleClick} />
+      <Content className="itemContent">
+        <Image
+          src={media.thumbnail}
+          alt="mediaThumbnail"
+          onClick={handleClick}
+        />
         <SliderDetailsButton onClick={() => onSelectSlide(media)} />
-        {isActive && <div className="mark" />}
-      </div>
-    </div>
+        {isActive && <BorderMark className="mark" />}
+      </Content>
+    </Container>
   );
 }
 

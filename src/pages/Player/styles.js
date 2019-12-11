@@ -37,3 +37,8 @@ export const ArrowBack = styled.i`
     }
   }
 `;
+
+export const PlyrPlayer = styled.video`
+  width: 100%;
+  height: 100%;
+`;
