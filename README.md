@@ -49,13 +49,13 @@ We have two fake users it can be used:
 - Peter Parker  
 
 
-    email: 'peter@netflix.com  
+    email: peter@netflix.com  
     password: peterflix  
     
 - Jonas Kahnwald  
 
 
-    email: 'jonas@netflix.com  
+    email: jonas@netflix.com  
     password: jonasflix  
 
 
