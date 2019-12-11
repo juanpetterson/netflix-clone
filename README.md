@@ -15,6 +15,7 @@ This project is simple mini Netflix clone application made with ReactJS
 - Main Movie Selection
 - Movies Player
 - Metrics page with Continue Watching (saved locally)
+- Media progress (saved locally)
 - Profile Page
 	
 ## Technologies
